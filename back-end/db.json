@@ -1,22 +1,28 @@
 {
-    "words": [
-        {
-            "id": 1,
-            "word": "cat",
-            "translation": "kot",
-            "category": "noun"
-        },
-        {
-            "id": 2,
-            "word": "dog",
-            "translation": "pies",
-            "category": "noun"
-        },
-        {
-            "id": 3,
-            "word": "jump",
-            "translation": "skakać",
-            "category": "verb"
-        }
-    ]
+  "tasks": [
+    {
+      "2024-04-02T12:00:00.000Z": {
+        "id": "1",
+        "running": "done",
+        "study": "done",
+        "diet": "done"
+      }
+    },
+    {
+      "2024-04-03T12:00:00.000Z": {
+        "id": "2",
+        "running": "done",
+        "study": "done",
+        "diet": "done"
+      }
+    },
+    {
+      "2024-04-04T12:00:00.000Z": {
+        "id": "3",
+        "running": "done",
+        "study": "done",
+        "diet": "done"
+      }
+    }
+  ]
 }

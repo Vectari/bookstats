@@ -1,31 +1,12 @@
 import { useState, useEffect } from "react";
 
+const url = "http://localhost:3000/tasks";
+
 function App() {
   const [data, setData] = useState([]);
-  const [img, setImg] = useState([]);
-  const [search, setSearch] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-  // const backend = "http://localhost:3000";
-
-  const handleChange = (e) => {
-    setSearch(e.target.value);
-  };
-
-  const handleSearch = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch(
-        `https://openlibrary.org/search.json?title=${search}`
-      );
-      const searchData = await response.json();
-      setSearchResults(searchData.docs); // Update to use `docs` instead of `results`
-    } catch (error) {
-      console.error("Error searching:", error);
-    }
-  };
 
   useEffect(() => {
-    fetch(`https://openlibrary.org/search.json?title=the+lord+of+the+rings`)
+    fetch(`${url}`)
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -34,57 +15,30 @@ function App() {
       })
       .then((res) => {
         setData(res);
-        setImg(res.docs[0].author_key);
       });
   }, []);
-  //
-  //
-  //
 
-  console.log(data);
-  console.log(searchResults);
-
-  const photo = `https://covers.openlibrary.org/a/olid/${img}-S.jpg`;
+  console.log(data)
 
   return (
     <>
       <h1>Test</h1>
-      <img src={photo} alt="" />
-      <form onSubmit={handleSearch}>
-        <input
-          type="text"
-          placeholder="Search title..."
-          value={search}
-          onChange={handleChange}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              handleSearch(e);
-            }
-          }}
-        />
-        <button type="submit">Search</button>
-      </form>
       <ul>
-        {searchResults.map((result, key) => (
-          <>
-            <li key={key}>
-              Title: {result.title} Author: {result.author_name}
+        {data.map(task => (
+          // Using Object.entries to access the date and status
+          Object.entries(task).map(([date, details]) => (
+            <li key={details.id}>
+              Date: {new Date(date).toLocaleDateString()}<br />
+              {Object.entries(details).map(([key, value]) => (
+                // Render only if the value is "done"
+                value === 'done' ? (
+                  <span key={key}>{key}: {value}<br /></span>
+                ) : null
+              ))}
             </li>
-            <img
-              src={`https://covers.openlibrary.org/b/olid/${result.cover_edition_key}-M.jpg `}
-            />
-          </>
+          ))
         ))}
       </ul>
-      {/* <ul>
-        {data.map(({ id, word, translation }) => (
-          <>
-            <li>{id}</li>
-            <li>{word}</li>
-            <li>{translation}</li>
-          </>
-        ))}
-      </ul> */}
     </>
   );
 }
