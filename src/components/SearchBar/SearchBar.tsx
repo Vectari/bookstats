@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Loader } from "../Loader/Loader";
 
 interface SearchResult {
   edition_key: string;
@@ -47,7 +48,7 @@ export function SearchBar() {
         />
         <button type="submit">Search</button>
       </form>
-      {loading && <h1>Loading...</h1>}
+      {loading && <Loader />}
       <ol>
         {searchResults.map((result) => (
           <li key={result.edition_key}>
