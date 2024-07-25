@@ -7,6 +7,8 @@ interface SearchResult {
   cover_edition_key: string;
   format: string;
   language: string;
+  publish_date: string;
+  publisher: string;
 }
 
 export function SearchBar() {
@@ -48,6 +50,8 @@ export function SearchBar() {
             <div>Author: {result.author_name}</div>
             <div>Format: {result.format}</div>
             <div>Language: {result.language}</div>
+            <div>Publish Date: {result.publish_date}</div>
+            <div>Publisher: {result.publisher}</div>
             <img
               src={`https://covers.openlibrary.org/b/olid/${result.cover_edition_key}-M.jpg `}
             />
