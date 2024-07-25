@@ -5,3 +5,5 @@ export function Loader() {
     </>
   );
 }
+
+// Add second type of loader for photos loading
