@@ -5,11 +5,11 @@ import "./index.css";
 // import { NavBar } from "./sections/NavBar/NavBar";
 // import { Hero } from "./sections/Hero/Hero";
 // import { Footer } from "./sections/Footer/Footer";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import { LogIn } from "./view/LogIn/LogIn";
 import { SignUp } from "./view/SignUp/SignUp";
-import App from "./App";
 import { SearchBar } from "./components/SearchBar/SearchBar";
+import { NavBar } from "./sections/NavBar/NavBar";
 
 // const search = "https://openlibrary.org/search.json?q=the+lord+of+the+rings";
 
@@ -30,7 +30,12 @@ import { SearchBar } from "./components/SearchBar/SearchBar";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: (
+      <>
+        <NavBar />
+        <Outlet />
+      </>
+    ),
     children: [
       {
         index: true,
