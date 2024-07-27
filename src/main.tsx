@@ -6,8 +6,8 @@ import { Footer } from "./sections/Footer/Footer";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import { LogIn } from "./view/LogIn/LogIn";
 import { SignUp } from "./view/SignUp/SignUp";
-import { SearchBar } from "./components/SearchBar/SearchBar";
 import { NavBar } from "./sections/NavBar/NavBar";
+import { Search } from "./view/Search/Search";
 
 const router = createBrowserRouter([
   {
@@ -15,7 +15,6 @@ const router = createBrowserRouter([
     element: (
       <>
         <NavBar />
-        <Hero />
         <Outlet />
         <Footer />
       </>
@@ -25,9 +24,13 @@ const router = createBrowserRouter([
         index: true,
         element: (
           <>
-            <SearchBar />
+            <Hero />
           </>
         ),
+      },
+      {
+        path: "/search",
+        element: <Search />,
       },
       {
         path: "/login",
