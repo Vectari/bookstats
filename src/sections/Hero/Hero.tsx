@@ -1,7 +1,9 @@
+import { RandomQuote } from "../../components/RandomQuote/RandomQuote";
+
 export function Hero() {
   return (
     <>
-      <h1>Hero section</h1>
+      <RandomQuote />
     </>
   );
 }

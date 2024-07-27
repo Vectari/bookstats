@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import { Hero } from "./sections/Hero/Hero";
-import { Footer } from "./sections/Footer/Footer";
+// import { Footer } from "./sections/Footer/Footer";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import { LogIn } from "./view/LogIn/LogIn";
 import { SignUp } from "./view/SignUp/SignUp";
@@ -16,7 +16,7 @@ const router = createBrowserRouter([
       <>
         <NavBar />
         <Outlet />
-        <Footer />
+        {/* <Footer /> */}
       </>
     ),
     children: [
