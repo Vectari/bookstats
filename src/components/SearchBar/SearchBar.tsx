@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { Loader } from "../Loader/Loader";
+import { OPEN_LIBRARY_API } from "../../api";
 
+interface SearchByProps {
+  searchBy: string;
+}
 interface SearchResult {
   edition_key: string;
   title: string;
@@ -12,7 +16,7 @@ interface SearchResult {
   publisher: string;
 }
 
-export function SearchBar() {
+export function SearchBar({ searchBy }: SearchByProps) {
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [loading, setLoading] = useState(false);
@@ -26,9 +30,7 @@ export function SearchBar() {
     try {
       console.log("Loading");
       setLoading(true);
-      const response = await fetch(
-        `https://openlibrary.org/search.json?title=${search}`
-      );
+      const response = await fetch(`${OPEN_LIBRARY_API}?${searchBy}=${search}`);
       const searchData = await response.json();
       setSearchResults(searchData.docs);
       setLoading(false);
@@ -42,7 +44,7 @@ export function SearchBar() {
       <form onSubmit={handleSearch}>
         <input
           type="text"
-          placeholder="Search title..."
+          placeholder={`Search by ${searchBy}...`}
           value={search}
           onChange={handleChange}
         />
