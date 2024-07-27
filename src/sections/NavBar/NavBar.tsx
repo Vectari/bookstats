@@ -24,6 +24,14 @@ export function NavBar() {
         </li>
         <li>
           <NavLink
+            to="/search"
+            className={activeLink === "/search" ? "active" : ""}
+          >
+            Search
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
             to="/login"
             className={activeLink === "/login" ? "active" : ""}
           >

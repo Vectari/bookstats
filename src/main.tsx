@@ -1,44 +1,36 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-// import { SearchBar } from "./components/SearchBar/SearchBar";
-// import { NavBar } from "./sections/NavBar/NavBar";
-// import { Hero } from "./sections/Hero/Hero";
-// import { Footer } from "./sections/Footer/Footer";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Hero } from "./sections/Hero/Hero";
+import { Footer } from "./sections/Footer/Footer";
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import { LogIn } from "./view/LogIn/LogIn";
 import { SignUp } from "./view/SignUp/SignUp";
-import App from "./App";
-import { SearchBar } from "./components/SearchBar/SearchBar";
-
-// const search = "https://openlibrary.org/search.json?q=the+lord+of+the+rings";
-
-// console.log(search);
-
-// ReactDOM.createRoot(document.getElementById("root")!).render(
-//   <React.StrictMode>
-//     {/* <NavBar />
-//     <Hero />
-//     <SearchBar />
-//     <Footer /> */}
-
-//     {/* <NavBar />
-//     <Outlet /> */}
-//   </React.StrictMode>
-// );
+import { NavBar } from "./sections/NavBar/NavBar";
+import { Search } from "./view/Search/Search";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: (
+      <>
+        <NavBar />
+        <Outlet />
+        <Footer />
+      </>
+    ),
     children: [
       {
         index: true,
         element: (
           <>
-            <SearchBar />
+            <Hero />
           </>
         ),
+      },
+      {
+        path: "/search",
+        element: <Search />,
       },
       {
         path: "/login",

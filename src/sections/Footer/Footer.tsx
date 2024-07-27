@@ -1,7 +1,9 @@
+import { StyledFooter } from "./Footer.style";
+
 export function Footer() {
   return (
     <>
-      <h1>Footer</h1>
+      <StyledFooter>Bookstats 2024</StyledFooter>
     </>
   );
 }
