@@ -6,7 +6,7 @@ export function Search() {
     <SearchWrapper>
       <h1>Search</h1>
       <SearchBar searchBy={"author"} />
-      <SearchBar searchBy={"title"} />
+      {/* <SearchBar searchBy={"title"} /> */}
     </SearchWrapper>
   );
 }
