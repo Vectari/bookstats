@@ -2,9 +2,9 @@ import { useState } from "react";
 import { Loader } from "../Loader/Loader";
 import { OPEN_LIBRARY_API } from "../../api";
 
-interface SearchByProps {
-  searchBy: string;
-}
+// interface SearchByProps {
+//   searchBy: string;
+// }
 interface SearchResult {
   edition_key: string;
   title: string;
@@ -16,9 +16,14 @@ interface SearchResult {
   publisher: string;
 }
 
-export function SearchBar({ searchBy }: SearchByProps) {
+interface SearchSelect {
+  searchBy: string;
+}
+// export function SearchBar({ searchBy }: SearchByProps) {
+export function SearchBar() {
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
+  const [searchSelect, setSearchSelect] = useState<SearchSelect>("");
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,7 +35,7 @@ export function SearchBar({ searchBy }: SearchByProps) {
     try {
       console.log("Loading");
       setLoading(true);
-      const response = await fetch(`${OPEN_LIBRARY_API}?${searchBy}=${search}`);
+      const response = await fetch(`${OPEN_LIBRARY_API}?${searchSelect}=${search}`);
       const searchData = await response.json();
       setSearchResults(searchData.docs);
       setLoading(false);
@@ -39,12 +44,26 @@ export function SearchBar({ searchBy }: SearchByProps) {
     }
   };
 
+  const handleSelect = (e: React.FormEvent<HTMLSelectElement>) => {
+    setSearchSelect(e.target.value);
+  };
+
   return (
     <>
+      <label htmlFor="searchBy">Search by: </label>
+      <select
+        name="searchBy"
+        id="searchBy"
+        value={searchSelect}
+        onChange={handleSelect}
+      >
+        <option value="author">author</option>
+        <option value="title">title</option>
+      </select>
       <form onSubmit={handleSearch}>
         <input
           type="text"
-          placeholder={`Search by ${searchBy}...`}
+          // placeholder={`Search by ${searchBy}...`}
           value={search}
           onChange={handleChange}
         />
