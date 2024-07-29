@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Loader } from "../Loader/Loader";
 import { OPEN_LIBRARY_API } from "../../api";
+import { StyledSearchBarWrapper } from "./SearchBar.style";
 
 interface SearchResult {
   edition_key: string;
@@ -45,11 +46,11 @@ export function SearchBar() {
 
   const handleCleanSearch = () => {
     setSearchSelect(searchSelect);
-    setSearch("")
+    setSearch("");
   };
 
   return (
-    <>
+    <StyledSearchBarWrapper>
       <button onClick={handleCleanSearch}>clean</button>
       {/* SELECT SECTION */}
       <label htmlFor="selectSearchBy">Search by: </label>
@@ -93,6 +94,6 @@ export function SearchBar() {
           </li>
         ))}
       </ol>
-    </>
+    </StyledSearchBarWrapper>
   );
 }
