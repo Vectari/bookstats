@@ -2,9 +2,6 @@ import { useState } from "react";
 import { Loader } from "../Loader/Loader";
 import { OPEN_LIBRARY_API } from "../../api";
 
-// interface SearchByProps {
-//   searchBy: string;
-// }
 interface SearchResult {
   edition_key: string;
   title: string;
@@ -16,14 +13,14 @@ interface SearchResult {
   publisher: string;
 }
 
-interface SearchSelect {
-  searchBy: string;
-}
-// export function SearchBar({ searchBy }: SearchByProps) {
+// interface SearchSelect {
+//   searchBy: string;
+// }
+
 export function SearchBar() {
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
-  const [searchSelect, setSearchSelect] = useState<SearchSelect>("");
+  const [searchSelect, setSearchSelect] = useState("title");
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,7 +32,9 @@ export function SearchBar() {
     try {
       console.log("Loading");
       setLoading(true);
-      const response = await fetch(`${OPEN_LIBRARY_API}?${searchSelect}=${search}`);
+      const response = await fetch(
+        `${OPEN_LIBRARY_API}?${searchSelect}=${search}`
+      );
       const searchData = await response.json();
       setSearchResults(searchData.docs);
       setLoading(false);
@@ -45,11 +44,12 @@ export function SearchBar() {
   };
 
   const handleSelect = (e: React.FormEvent<HTMLSelectElement>) => {
-    setSearchSelect(e.target.value);
+    setSearchSelect((e.target as HTMLSelectElement).value);
   };
 
   return (
     <>
+      {/* SELECT SECTION */}
       <label htmlFor="searchBy">Search by: </label>
       <select
         name="searchBy"
@@ -60,25 +60,26 @@ export function SearchBar() {
         <option value="author">author</option>
         <option value="title">title</option>
       </select>
+
+      {/* FORM SECTION */}
       <form onSubmit={handleSearch}>
-        <input
-          type="text"
-          // placeholder={`Search by ${searchBy}...`}
-          value={search}
-          onChange={handleChange}
-        />
+        <input type="text" value={search} onChange={handleChange} placeholder={`Search by ${searchSelect}`}/>
         <button type="submit">Search</button>
       </form>
+
+      {/* LOADER SECTION */}
       {loading && <Loader />}
+
+      {/* SEARCH RESULT SECTION */}
       <ol>
         {searchResults.map((result) => (
           <li key={result.edition_key}>
             <div>Title: {result.title} </div>
             <div>Author: {result.author_name}</div>
-            <div>Format: {result.format}</div>
-            <div>Language: {result.language}</div>
-            <div>Publish Date: {result.publish_date}</div>
-            <div>Publisher: {result.publisher}</div>
+            {/* <div>Format: {result.format}</div> */}
+            {/* <div>Language: {result.language}</div> */}
+            {/* <div>Publish Date: {result.publish_date}</div> */}
+            {/* <div>Publisher: {result.publisher}</div> */}
             <img
               src={`https://covers.openlibrary.org/b/olid/${result.cover_edition_key}-M.jpg `}
             />
