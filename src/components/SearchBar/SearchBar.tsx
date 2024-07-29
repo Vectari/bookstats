@@ -13,10 +13,6 @@ interface SearchResult {
   publisher: string;
 }
 
-// interface SearchSelect {
-//   searchBy: string;
-// }
-
 export function SearchBar() {
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
@@ -47,13 +43,19 @@ export function SearchBar() {
     setSearchSelect((e.target as HTMLSelectElement).value);
   };
 
+  const handleCleanSearch = () => {
+    setSearchSelect(searchSelect);
+    setSearch("")
+  };
+
   return (
     <>
+      <button onClick={handleCleanSearch}>clean</button>
       {/* SELECT SECTION */}
-      <label htmlFor="searchBy">Search by: </label>
+      <label htmlFor="selectSearchBy">Search by: </label>
       <select
-        name="searchBy"
-        id="searchBy"
+        name="selectSearchBy"
+        id="selectSearchBy"
         value={searchSelect}
         onChange={handleSelect}
       >
@@ -63,7 +65,12 @@ export function SearchBar() {
 
       {/* FORM SECTION */}
       <form onSubmit={handleSearch}>
-        <input type="text" value={search} onChange={handleChange} placeholder={`Search by ${searchSelect}`}/>
+        <input
+          type="text"
+          value={search}
+          onChange={handleChange}
+          placeholder={`Search by ${searchSelect}`}
+        />
         <button type="submit">Search</button>
       </form>
 
