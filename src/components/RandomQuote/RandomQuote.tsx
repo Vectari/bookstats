@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { QUOTES_API } from "../../api";
+import { StyledRandomQuoteWrapper } from "./RandomQuote.style";
 
 interface Quote {
   text: string;
@@ -37,15 +38,15 @@ export function RandomQuote() {
   return (
     <>
       {randomQuote && (
-        <div>
-          <p>{randomQuote.text}</p>
-          <p>
+        <StyledRandomQuoteWrapper>
+          <p className="quote">{randomQuote.text}</p>
+          <p className="author">
             ~{" "}
             {randomQuote.author
               .replace(", type.fit", "")
               .replace("type.fit", "Dale Carnegie")}
           </p>
-        </div>
+        </StyledRandomQuoteWrapper>
       )}
     </>
   );
