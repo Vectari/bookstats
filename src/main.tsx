@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import { Hero } from "./sections/Hero/Hero";
 // import { Footer } from "./sections/Footer/Footer";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import { LogIn } from "./view/LogIn/LogIn";
 import { SignUp } from "./view/SignUp/SignUp";
 import { NavBar } from "./sections/NavBar/NavBar";
 import { Search } from "./view/Search/Search";
+import { Home } from "./view/Home/Home";
 
 const router = createBrowserRouter([
   {
@@ -24,7 +24,7 @@ const router = createBrowserRouter([
         index: true,
         element: (
           <>
-            <Hero />
+            <Home />
           </>
         ),
       },
