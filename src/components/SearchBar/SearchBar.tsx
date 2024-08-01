@@ -2,16 +2,13 @@ import { useState } from "react";
 import { Loader } from "../Loader/Loader";
 import { OPEN_LIBRARY_API } from "../../api";
 import { StyledSearchBarWrapper } from "./SearchBar.style";
+import { useNavigate } from "react-router-dom";
 
 interface SearchResult {
   edition_key: string;
   title: string;
   author_name: string[];
   cover_edition_key: string;
-  format: string;
-  language: string;
-  publish_date: string;
-  publisher: string;
 }
 
 export function SearchBar() {
@@ -20,6 +17,8 @@ export function SearchBar() {
   const [searchSelect, setSearchSelect] = useState("title");
   const [loading, setLoading] = useState(false);
 
+  const navigate = useNavigate();
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
   };
@@ -27,7 +26,6 @@ export function SearchBar() {
   const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      console.log("Loading");
       setLoading(true);
       const response = await fetch(
         `${OPEN_LIBRARY_API}?${searchSelect}=${search}`
@@ -81,15 +79,17 @@ export function SearchBar() {
       {/* SEARCH RESULT SECTION */}
       <ol>
         {searchResults.map((result) => (
-          <li key={result.edition_key}>
+          <li
+            key={result.edition_key}
+            onClick={() => navigate(`/detail/${result.edition_key}`)}
+            style={{ cursor: "pointer" }}
+          >
             <div>Title: {result.title} </div>
             <div>Author: {result.author_name}</div>
-            {/* <div>Format: {result.format}</div> */}
-            {/* <div>Language: {result.language}</div> */}
-            {/* <div>Publish Date: {result.publish_date}</div> */}
-            {/* <div>Publisher: {result.publisher}</div> */}
+            <div>ID: {result.edition_key}</div>
             <img
-              src={`https://covers.openlibrary.org/b/olid/${result.cover_edition_key}-M.jpg `}
+              src={`https://covers.openlibrary.org/b/olid/${result.cover_edition_key}-M.jpg`}
+              alt={result.title}
             />
           </li>
         ))}

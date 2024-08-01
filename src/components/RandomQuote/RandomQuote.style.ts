@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const StyledRandomQuoteWrapper = styled.div`
+  margin: 1rem;
   padding: 2rem;
-  margin: 2rem;
   width: 20rem;
   background-color: yellow;
   border-radius: 2rem;
