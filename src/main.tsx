@@ -8,6 +8,7 @@ import { SignUp } from "./view/SignUp/SignUp";
 import { NavBar } from "./sections/NavBar/NavBar";
 import { Search } from "./view/Search/Search";
 import { Home } from "./view/Home/Home";
+import { BookDetail } from "./view/BookDetail/BookDetail";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,9 @@ const router = createBrowserRouter([
       {
         path: "/search",
         element: <Search />,
+      },{
+        path: "/detail/:edition_key",
+        element: <BookDetail />
       },
       {
         path: "/login",
