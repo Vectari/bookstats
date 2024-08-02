@@ -81,7 +81,9 @@ export function SearchBar() {
         {searchResults.map((result) => (
           <li
             key={result.edition_key}
-            onClick={() => navigate(`/detail/${result.edition_key}`)}
+            onClick={() =>
+              navigate(`/detail/${result.edition_key}`.substring(0, 18))
+            }
             style={{ cursor: "pointer" }}
           >
             <div>Title: {result.title} </div>
