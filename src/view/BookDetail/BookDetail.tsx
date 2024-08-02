@@ -12,11 +12,14 @@ interface BookDetail {
   cover: string;
   publish_date: string;
   publishers: string[];
+  edition_key: string;
+  author_name: string;
+  cover_edition_key: string;
 }
 
 export function BookDetail() {
   const { edition_key } = useParams<{ edition_key: string }>();
-  const [bookDetail, setBookDetail] = useState<BookDetail | null>(null);
+  const [bookDetail, setBookDetail] = useState<BookDetail[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -53,11 +56,15 @@ export function BookDetail() {
       <p>Publishers: {bookDetail.publishers.join(', ')}</p>
       <img src={`https://covers.openlibrary.org/b/olid/${edition_key}-L.jpg`} alt={bookDetail.title} />  */}
       {bookDetail.map((result) => (
-        <>
+        <div key={result.edition_key}>
           <div>Title: {result.title} </div>
           <div>Author: {result.author_name}</div>
           <div>ID: {result.edition_key}</div>
-        </>
+          <img
+            src={`https://covers.openlibrary.org/b/olid/${result.cover_edition_key}-M.jpg`}
+            alt={result.title}
+          />
+        </div>
       ))}
     </div>
   );
