@@ -9,4 +9,6 @@ Favicon SVG link - https://www.svgrepo.com/svg/532298/book-section
 - [x] book detail in one page with content from API based on user click
 - [ ] log in user
 - [ ] sign up user
-- [ ] integrate with backend to save boks in user's profile
+- [ ] integrate with backend to save books in user's profile
+- [ ] style
+- [ ] mobile
