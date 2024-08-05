@@ -1,8 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-// import { Footer } from "./sections/Footer/Footer";
-import { BrowserRouter as Router, createBrowserRouter, Outlet, Route, RouterProvider, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  createBrowserRouter,
+  Outlet,
+  Route,
+  RouterProvider,
+  Routes,
+} from "react-router-dom";
 import { LogIn } from "./view/LogIn/LogIn";
 import { SignUp } from "./view/SignUp/SignUp";
 import { NavBar } from "./sections/NavBar/NavBar";
@@ -29,7 +35,6 @@ const router = createBrowserRouter([
       <>
         <NavBar />
         <Outlet />
-        {/* <Footer /> */}
       </>
     ),
     children: [
@@ -44,9 +49,10 @@ const router = createBrowserRouter([
       {
         path: "/search",
         element: <Search />,
-      },{
+      },
+      {
         path: "/detail/:edition_key",
-        element: <BookDetail />
+        element: <BookDetail />,
       },
       {
         path: "/login",
