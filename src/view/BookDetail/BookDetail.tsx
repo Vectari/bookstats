@@ -68,8 +68,10 @@ export function BookDetail() {
           />
         </div>
       ))} */}
+      <h1>----------</h1>
       <div>Title: {selectedBookDetail.title} </div>
       <div>Author: {selectedBookDetail.author_name}</div>
+      <div>Publish date: {selectedBookDetail.publish_date}</div>
       <div>ID: {selectedBookDetail.edition_key}</div>
       <img
         src={`https://covers.openlibrary.org/b/olid/${selectedBookDetail.cover_edition_key}-M.jpg`}
