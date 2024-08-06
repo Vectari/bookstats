@@ -22,6 +22,8 @@ export function BookDetail() {
   const [bookDetail, setBookDetail] = useState<BookDetail[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const selectedBookDetail = bookDetail[0];
+
   useEffect(() => {
     const fetchBookDetail = async () => {
       try {
@@ -29,8 +31,8 @@ export function BookDetail() {
         const data = await response.json();
         setBookDetail(data.docs);
         setLoading(false);
-        console.log(`${OPEN_LIBRARY_API}?q=${edition_key}`);
-        console.log(data);
+        // console.log(`${OPEN_LIBRARY_API}?q=${edition_key}`);
+        console.log(data.docs);
       } catch (error) {
         console.error("Error fetching book details:", error);
       }
@@ -55,7 +57,7 @@ export function BookDetail() {
       <p>Publish Date: {bookDetail.publish_date}</p>
       <p>Publishers: {bookDetail.publishers.join(', ')}</p>
       <img src={`https://covers.openlibrary.org/b/olid/${edition_key}-L.jpg`} alt={bookDetail.title} />  */}
-      {bookDetail.map((result) => (
+      {/* {bookDetail.map((result) => (
         <div key={result.edition_key}>
           <div>Title: {result.title} </div>
           <div>Author: {result.author_name}</div>
@@ -65,7 +67,16 @@ export function BookDetail() {
             alt={result.title}
           />
         </div>
-      ))}
+      ))} */}
+      <h1>----------</h1>
+      <div>Title: {selectedBookDetail.title} </div>
+      <div>Author: {selectedBookDetail.author_name}</div>
+      <div>Publish date: {selectedBookDetail.publish_date}</div>
+      <div>ID: {selectedBookDetail.edition_key}</div>
+      <img
+        src={`https://covers.openlibrary.org/b/olid/${selectedBookDetail.cover_edition_key}-M.jpg`}
+        alt={selectedBookDetail.title}
+      />
     </div>
   );
 }
